@@ -201,11 +201,11 @@
   "anime": "Slam Dunk",
   "character": "Kaede Rukawa"
 },
-{
-  "japanese": "ä¿ºã�¯ã‚¬ãƒ³ãƒ€ãƒ ã� ï¼�",
-  "romaji": "Ore wa Gandamu da!",
-  "english": "I am Gundam!",
-  "anime": "Mobile Suit Gundam 00",
-  "character": "Setsuna F. Seiei"
-}
+  {
+    "japanese": "この世界は残酷だ... そしてとても美しい",
+    "romaji": "Kono sekai wa zankoku da... soshite totemo utsukushii",
+    "english": "The world is cruel... but also very beautiful.",
+    "anime": "Attack on Titan",
+    "character": "Mikasa Ackerman"
+  }
 ]
