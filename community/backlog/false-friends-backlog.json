@@ -627,7 +627,7 @@
     "example": "彼は意外とナイーブな性格だ。",
     "id": 70,
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "termA": "シール (shiiru)",
@@ -636,7 +636,7 @@
     "example": "ノートにシールを貼った。",
     "id": 71,
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "termA": "ホッチキス (hocchikisu)",
@@ -644,7 +644,7 @@
     "explanation": "ホッチキス means stapler. (Set 4)",
     "example": "資料をホッチキスで留めてください。",
     "id": 72,
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
