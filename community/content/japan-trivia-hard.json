@@ -75,5 +75,27 @@
       "Comique"
     ],
     "correctIndex": 0
+  },
+  {
+    "question": "Which sea separates Japan from the Korean Peninsula?",
+    "difficulty": "hard",
+    "answers": [
+      "Sea of Japan",
+      "East China Sea",
+      "Philippine Sea",
+      "Bering Sea"
+    ],
+    "correctIndex": 0
+  },
+    {
+    "question": "Which Japanese island chain is known for tropical beaches and coral reefs?",
+    "difficulty": "hard",
+    "answers": [
+      "Okinawa",
+      "Sado",
+      "Awaji",
+      "Oki"
+    ],
+    "correctIndex": 0
   }
 ]

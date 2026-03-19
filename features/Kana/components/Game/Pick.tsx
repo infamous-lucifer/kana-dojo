@@ -26,21 +26,6 @@ const random = new Random();
 // Get the global adaptive selector for weighted character selection
 const adaptiveSelector = getGlobalAdaptiveSelector();
 
-// Draw `count` distinct kana characters using weighted adaptive selection
-function drawBatch(selectedKana: string[], count: number): string[] {
-  if (selectedKana.length === 0) return [];
-  const effectiveCount = Math.min(count, selectedKana.length);
-  const result: string[] = [];
-  for (let i = 0; i < effectiveCount; i++) {
-    const pool = selectedKana.filter(k => !result.includes(k));
-    if (pool.length === 0) break;
-    const char = adaptiveSelector.selectWeightedCharacter(pool);
-    adaptiveSelector.markCharacterSeen(char);
-    result.push(char);
-  }
-  return result;
-}
-
 // Helper function to determine if a kana character is hiragana or katakana
 const isHiragana = (char: string): boolean => {
   // Hiragana Unicode range: U+3040 to U+309F
@@ -118,7 +103,7 @@ const PickGame = ({ isHidden }: PickGameProps) => {
   });
 
   // Set to true to force word building mode for testing
-  const FORCE_WORD_BUILDING_MODE = false;
+  const FORCE_WORD_BUILDING_MODE = true;
 
   // Word building mode hook - triggers adaptively based on performance
   const {
@@ -178,7 +163,6 @@ const PickGame = ({ isHidden }: PickGameProps) => {
   const { trigger: triggerCrazyMode } = useCrazyModeTrigger();
 
   const kanaGroupIndices = useKanaStore(state => state.kanaGroupIndices);
-  const kanaPerRound = useKanaStore(state => state.kanaPerRound);
 
   const selectedKana = useMemo(
     () => kanaGroupIndices.map(i => kana[i].kana).flat(),
@@ -228,20 +212,9 @@ const PickGame = ({ isHidden }: PickGameProps) => {
     [selectedPairs2],
   );
 
-  // Batch state — only active when kanaPerRound > 1 and not in reverse mode
-  const [batch, setBatch] = useState<string[]>(() =>
-    kanaPerRound > 1 ? drawBatch(selectedKana, kanaPerRound) : [],
-  );
-  const [batchIndex, setBatchIndex] = useState(0);
-  const [answeredInBatch, setAnsweredInBatch] = useState<Set<number>>(
-    new Set(),
-  );
-
   // State for normal pick mode - uses weighted selection for adaptive learning
   const [correctKanaChar, setCorrectKanaChar] = useState(() => {
     if (selectedKana.length === 0) return '';
-    // In batch mode, the first char is already drawn and marked seen by drawBatch
-    if (kanaPerRound > 1 && batch.length > 0) return batch[0];
     const selected = adaptiveSelector.selectWeightedCharacter(selectedKana);
     adaptiveSelector.markCharacterSeen(selected);
     return selected;
@@ -494,36 +467,19 @@ const PickGame = ({ isHidden }: PickGameProps) => {
         // Normal pick mode logic
         if (selectedChar === correctRomajiChar) {
           handleCorrectAnswer(correctKanaChar);
+          // Use weighted selection - prioritizes characters user struggles with
+          const newKana = adaptiveSelector.selectWeightedCharacter(
+            selectedKana,
+            correctKanaChar,
+          );
+          adaptiveSelector.markCharacterSeen(newKana);
+          setCorrectKanaChar(newKana);
           setFeedback(
             <>
               <span>{`${correctKanaChar} = ${correctRomajiChar} `}</span>
               <CircleCheck className='inline text-(--main-color)' />
             </>,
           );
-          if (kanaPerRound > 1) {
-            // Batch mode: advance to next kana in batch or start new batch
-            const newAnsweredSet = new Set(answeredInBatch).add(batchIndex);
-            const nextIndex = batchIndex + 1;
-            if (nextIndex >= batch.length) {
-              const newBatch = drawBatch(selectedKana, kanaPerRound);
-              setBatch(newBatch);
-              setBatchIndex(0);
-              setAnsweredInBatch(new Set());
-              setCorrectKanaChar(newBatch[0]);
-            } else {
-              setAnsweredInBatch(newAnsweredSet);
-              setBatchIndex(nextIndex);
-              setCorrectKanaChar(batch[nextIndex]);
-            }
-          } else {
-            // Single mode: weighted selection for next character
-            const newKana = adaptiveSelector.selectWeightedCharacter(
-              selectedKana,
-              correctKanaChar,
-            );
-            adaptiveSelector.markCharacterSeen(newKana);
-            setCorrectKanaChar(newKana);
-          }
         } else {
           handleWrongAnswer(selectedChar);
           setFeedback(
@@ -576,10 +532,6 @@ const PickGame = ({ isHidden }: PickGameProps) => {
       correctRomajiCharReverse,
       selectedRomaji,
       correctKanaCharReverse,
-      kanaPerRound,
-      batch,
-      batchIndex,
-      answeredInBatch,
     ],
   );
 
@@ -611,8 +563,8 @@ const PickGame = ({ isHidden }: PickGameProps) => {
     recordWrongAnswer();
   };
 
-  // Render word building game if in that mode and have enough characters (skip in batch mode)
-  if (isWordBuildingMode && hasEnoughCharsForWordBuilding && kanaPerRound <= 1) {
+  // Render word building game if in that mode and have enough characters
+  if (isWordBuildingMode && hasEnoughCharsForWordBuilding) {
     return (
       <WordBuildingGame
         isHidden={isHidden}
@@ -637,41 +589,9 @@ const PickGame = ({ isHidden }: PickGameProps) => {
       )}
     >
       {/* <GameIntel gameMode={gameMode} /> */}
-      {kanaPerRound > 1 && !isReverse ? (
-        // Batch mode: show a row of kana chips
-        <div className='flex flex-row items-center justify-center gap-6'>
-          {batch.map((char, idx) => {
-            const isActive = idx === batchIndex;
-            const isAnswered = answeredInBatch.has(idx);
-            return (
-              <div
-                key={char + idx}
-                className='relative flex flex-col items-center'
-              >
-                <span
-                  className={clsx(
-                    'font-medium transition-all duration-150',
-                    isActive &&
-                      'text-8xl text-(--main-color) ring-2 ring-(--main-color) rounded-xl px-2',
-                    isAnswered && 'text-4xl text-(--muted-color)',
-                    !isActive && !isAnswered && 'text-4xl opacity-30',
-                  )}
-                >
-                  {char}
-                </span>
-                {isAnswered && (
-                  <CircleCheck className='mt-1 h-4 w-4 text-(--main-color)' />
-                )}
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        // Single character display
-        <div className='flex flex-row items-center gap-1'>
-          <p className='text-8xl font-medium sm:text-9xl'>{displayChar}</p>
-        </div>
-      )}
+      <div className='flex flex-row items-center gap-1'>
+        <p className='text-8xl font-medium sm:text-9xl'>{displayChar}</p>
+      </div>
       {/* First row - always 3 options */}
       <div className='flex w-full flex-row gap-5 sm:justify-evenly sm:gap-0'>
         {topRow.map((variantChar: string, i: number) => (

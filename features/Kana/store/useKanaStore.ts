@@ -3,11 +3,9 @@ import { create } from 'zustand';
 interface IKanaState {
   selectedGameModeKana: string;
   kanaGroupIndices: number[];
-  kanaPerRound: number;
   setSelectedGameModeKana: (mode: string) => void;
   addKanaGroupIndex: (kanaGroupIndex: number) => void;
   addKanaGroupIndices: (kanaGroupIndices: number[]) => void;
-  setKanaPerRound: (count: number) => void;
 }
 
 const sameArray = (a: number[], b: number[]) =>
@@ -64,9 +62,7 @@ const toggleNumbers = (arr: number[], input: number[]): number[] => {
 const useKanaStore = create<IKanaState>(set => ({
   selectedGameModeKana: 'Pick',
   kanaGroupIndices: [],
-  kanaPerRound: 1,
   setSelectedGameModeKana: gameMode => set({ selectedGameModeKana: gameMode }),
-  setKanaPerRound: count => set({ kanaPerRound: count }),
 
   addKanaGroupIndex: kanaGroupIndex =>
     set(state => {

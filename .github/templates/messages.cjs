@@ -44,7 +44,7 @@ module.exports = {
   config: {
     // Stale issue timing (in milliseconds)
     staleWarningAfterMs: 12 * 60 * 60 * 1000, // 12 hours
-    staleCloseAfterMs: 18 * 60 * 60 * 1000, // 18 hours
+    staleCloseAfterMs: 24 * 60 * 60 * 1000, // 24 hours
   },
 
   // =============================================================================
@@ -184,7 +184,7 @@ module.exports = {
       body: 'This issue has been inactive for 12 hours.',
       action: "If you're still working on it, please comment to let us know!",
       consequence:
-        'Otherwise, it will be automatically closed in **6 hours** and made available for others to claim.',
+        'Otherwise, it will be automatically closed in **12 hours** and made available for others to claim.',
       footer: 'Need help? Just ask! 🙌',
     },
     unassignedWarning: {
@@ -198,7 +198,7 @@ module.exports = {
     },
     closed: {
       title: '🕐 **This issue has been automatically closed**',
-      reason: 'due to 18 hours of inactivity.',
+      reason: 'due to 24 hours of inactivity.',
       reassurance:
         "Don't worry—the contribution opportunity will be re-posted for someone else to claim.",
       footer: 'Thanks for your interest in contributing to KanaDojo! 🙏',

@@ -66,19 +66,6 @@ const GameModes = ({
   const kanjiSelection = useKanjiSelection();
   const vocabSelection = useVocabSelection();
 
-  const KANA_PER_ROUND_OPTIONS = [1, 2, 3, 4, 5];
-  const { kanaPerRound, setKanaPerRound } = kanaSelection;
-
-  useEffect(() => {
-    if (!isOpen || currentDojo !== 'kana') return;
-    if (typeof window === 'undefined') return;
-    const saved = localStorage.getItem('kanaPerRound');
-    const parsed = saved ? parseInt(saved) : NaN;
-    if (Number.isFinite(parsed) && parsed >= 1 && parsed <= 5) {
-      setKanaPerRound(parsed);
-    }
-  }, [isOpen, currentDojo, setKanaPerRound]);
-
   const selectedGameModeKana = kanaSelection.gameMode;
   const setSelectedGameModeKana = kanaSelection.setGameMode;
   const kanaGroupIndices = kanaSelection.selectedGroupIndices;
@@ -312,38 +299,6 @@ const GameModes = ({
               );
             })}
           </div>
-
-          {currentDojo === 'kana' && mode === 'train' && (
-            <div className='space-y-3 rounded-lg bg-(--card-color) p-4'>
-              <p className='text-sm font-medium text-(--secondary-color)'>
-                Kana per round:
-              </p>
-              <div className='flex flex-wrap justify-center gap-2'>
-                {KANA_PER_ROUND_OPTIONS.map(count => (
-                  <ActionButton
-                    key={count}
-                    onClick={() => {
-                      playClick();
-                      setKanaPerRound(count);
-                      localStorage.setItem('kanaPerRound', count.toString());
-                    }}
-                    colorScheme={kanaPerRound === count ? 'main' : 'secondary'}
-                    borderColorScheme={
-                      kanaPerRound === count ? 'main' : 'secondary'
-                    }
-                    borderBottomThickness={8}
-                    borderRadius='3xl'
-                    className={clsx(
-                      'w-auto px-4 py-2',
-                      kanaPerRound !== count && 'opacity-60',
-                    )}
-                  >
-                    {count}
-                  </ActionButton>
-                ))}
-              </div>
-            </div>
-          )}
 
           {mode === 'blitz' && (
             <div className='space-y-3 rounded-lg bg-(--card-color) p-4'>

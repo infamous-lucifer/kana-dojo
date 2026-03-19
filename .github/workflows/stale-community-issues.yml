@@ -118,7 +118,8 @@ jobs:
 
             const now = new Date();
             const WARNING_THRESHOLD_MS = templates.config.staleWarningAfterMs;   // 12 hours
-            const CLOSE_THRESHOLD_MS = templates.config.staleCloseAfterMs;       // 18 hours
+            const CLOSE_THRESHOLD_MS = templates.config.staleCloseAfterMs;       // 24 hours
+            const ASSIGNED_CLOSE_AFTER_WARNING_MS = CLOSE_THRESHOLD_MS - WARNING_THRESHOLD_MS; // 12 hours
             const UNASSIGNED_CLOSE_THRESHOLD_MS = 8 * 60 * 60 * 1000; // 8 hours
 
             let needsCommit = false;
@@ -140,6 +141,8 @@ jobs:
             let skippedUnassigned = 0;
             let skippedAssigned = 0;
             let closedUnassigned = 0;
+            let warnedAssigned = 0;
+            let closedAssigned = 0;
             let apiFailures = 0;
 
             function isTransientGithubError(error) {
@@ -393,12 +396,81 @@ jobs:
               }
 
               if (timeSinceActivity >= WARNING_THRESHOLD_MS) {
-                skippedAssigned += 1;
-                console.log(`Skipping stale warning/auto-close for assigned issue #${issue.number}: ${issue.title}`);
+                const assigneeMentions = issue.assignees
+                  .map(function(assignee) { return `@${assignee.login}`; })
+                  .join(' ');
+
+                if (hasWarning && timeSinceActivity >= ASSIGNED_CLOSE_AFTER_WARNING_MS) {
+                  console.log(`Closing stale assigned issue #${issue.number}: ${issue.title}`);
+                  const closedTemplate = templates.staleIssues.closed;
+                  const closeBody =
+                    `${closedTemplate.title}\n\n` +
+                    `${assigneeMentions ? `${assigneeMentions} ` : ''}${closedTemplate.reason}\n\n` +
+                    `${closedTemplate.reassurance}\n\n` +
+                    `${closedTemplate.footer}`;
+                  try {
+                    await runGithubApi(`close-assigned-issue-${issue.number}`, function() {
+                      return github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: issue.number,
+                        body: closeBody
+                      });
+                    });
+                    await runGithubApi(`close-assigned-issue-state-${issue.number}`, function() {
+                      return github.rest.issues.update({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: issue.number,
+                        state: 'closed',
+                        state_reason: 'not_planned'
+                      });
+                    });
+                    closedAssigned += 1;
+                  } catch (error) {
+                    apiFailures += 1;
+                    console.log(`Could not close assigned issue #${issue.number}: ${error.message}`);
+                  }
+                  continue;
+                }
+
+                if (!hasWarning) {
+                  const warningTemplate = templates.staleIssues.warning;
+                  const warningBody =
+                    `${warningTemplate.greeting}\n\n` +
+                    `${assigneeMentions ? `${assigneeMentions} ` : ''}${warningTemplate.body}\n\n` +
+                    `${warningTemplate.action}\n\n` +
+                    `${warningTemplate.consequence}\n\n` +
+                    `${warningTemplate.footer}`;
+                  try {
+                    await runGithubApi(`warn-assigned-issue-${issue.number}`, function() {
+                      return github.rest.issues.createComment({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: issue.number,
+                        body: warningBody
+                      });
+                    });
+                    await runGithubApi(`label-assigned-issue-warning-${issue.number}`, function() {
+                      return github.rest.issues.addLabels({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: issue.number,
+                        labels: [templates.labels.staleWarning]
+                      });
+                    });
+                    warnedAssigned += 1;
+                  } catch (error) {
+                    apiFailures += 1;
+                    console.log(`Could not add warning for assigned issue #${issue.number}: ${error.message}`);
+                  }
+                } else {
+                  skippedAssigned += 1;
+                }
               }
             }
 
-            console.log(`Stale issue summary: total=${issues.length}, skipped_unassigned=${skippedUnassigned}, skipped_assigned=${skippedAssigned}, closed_unassigned=${closedUnassigned}, api_failures=${apiFailures}`);
+            console.log(`Stale issue summary: total=${issues.length}, skipped_unassigned=${skippedUnassigned}, skipped_assigned=${skippedAssigned}, warned_assigned=${warnedAssigned}, closed_unassigned=${closedUnassigned}, closed_assigned=${closedAssigned}, api_failures=${apiFailures}`);
 
             if (needsCommit) {
               fs.writeFileSync(themeBacklogPath, JSON.stringify(themes, null, 2));
