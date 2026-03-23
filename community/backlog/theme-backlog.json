@@ -40,7 +40,7 @@
     "backgroundColor": "oklch(95.0% 0.008 90.0 / 1)",
     "mainColor": "oklch(55.0% 0.220 25.0 / 1)",
     "secondaryColor": "oklch(45.0% 0.150 20.0 / 1)",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1903,7 +1903,7 @@
     "mainColor": "oklch(78.0% 0.180 235.0 / 1)",
     "secondaryColor": "oklch(62.0% 0.130 270.0 / 1)",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": "wasanbon",
@@ -1913,7 +1913,7 @@
     "mainColor": "oklch(62.0% 0.110 75.0 / 1)",
     "secondaryColor": "oklch(70.0% 0.060 85.0 / 1)",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": "bento-sage",
@@ -1923,7 +1923,7 @@
     "mainColor": "oklch(70.0% 0.115 135.0 / 1)",
     "secondaryColor": "oklch(58.0% 0.085 160.0 / 1)",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": "harbor-lanterns",
@@ -1933,7 +1933,7 @@
     "mainColor": "oklch(78.0% 0.170 45.0 / 1)",
     "secondaryColor": "oklch(70.0% 0.090 210.0 / 1)",
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "id": "sumi-ink",
