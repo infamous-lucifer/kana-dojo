@@ -122,7 +122,7 @@
     "explanation": "Often means trying something new. (Set 1)",
     "example": "新しい料理にチャレンジしてみる。",
     "id": 14,
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -510,7 +510,7 @@
     "example": "会社のイメージが良くなった。",
     "id": 57,
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "termA": "サラリーマン (sarariman)",
@@ -870,7 +870,7 @@
     "example": "会社のイメージが良くなった。",
     "id": 97,
     "issued": false,
-    "completed": false
+    "completed": true
   },
   {
     "termA": "サラリーマン (sarariman)",
