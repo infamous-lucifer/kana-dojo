@@ -177,8 +177,8 @@ const NavLink = memo(
     if (useSlidingIndicator) {
       // Different indicator styles based on USE_ACTION_BUTTON_STYLE
       const indicatorClasses = USE_ACTION_BUTTON_STYLE
-        ? 'absolute inset-0 rounded-xl lg:rounded-2xl border-b-6 lg:border-b-8 border-(--main-color-accent) bg-(--main-color)'
-        : 'absolute inset-0 rounded-2xl bg-(--card-color)';
+        ? 'absolute inset-0 rounded-xl lg:rounded-2xl border-b-6 lg:border-b-8 border-(--main-color-accent) bg-(--main-color) motion-safe:animate-float [--float-distance:-3px]'
+        : 'absolute inset-0 rounded-2xl bg-(--card-color) motion-safe:animate-float [--float-distance:-3px]';
 
       // Text color when active differs based on style
       const activeTextClass = USE_ACTION_BUTTON_STYLE
@@ -217,6 +217,7 @@ const NavLink = memo(
               isDesktopCollapsed && isMain && 'lg:justify-center lg:px-3',
               paddingClasses,
               !isMain && 'max-lg:hidden',
+              isActive && 'motion-safe:animate-float [--float-distance:-3px]',
               isActive
                 ? activeTextClass
                 : 'text-(--secondary-color) hover:bg-(--card-color)',
