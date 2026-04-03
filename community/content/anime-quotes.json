@@ -355,66 +355,73 @@
     "character": "Keigo Atobe"
   },
   {
-  "japanese": "痛みを伴わない教訓には意味がない",
-  "romaji": "Itami o tomonawanai kyoukun ni wa imi ga nai",
-  "english": "A lesson without pain is meaningless. (alt wording 35) (alt wording 87)",
-  "anime": "Fullmetal Alchemist: Brotherhood",
-  "character": "Edward Elric"
+    "japanese": "痛みを伴わない教訓には意味がない",
+    "romaji": "Itami o tomonawanai kyoukun ni wa imi ga nai",
+    "english": "A lesson without pain is meaningless. (alt wording 35) (alt wording 87)",
+    "anime": "Fullmetal Alchemist: Brotherhood",
+    "character": "Edward Elric"
   },
   {
-  "japanese": "明日の問題は明日の俺に任せる",
-  "romaji": "Ashita no mondai wa ashita no ore ni makaseru",
-  "english": "I'll leave tomorrow's problems to tomorrow's me.",
-  "anime": "One Punch Man",
-  "character": "Saitama"
+    "japanese": "明日の問題は明日の俺に任せる",
+    "romaji": "Ashita no mondai wa ashita no ore ni makaseru",
+    "english": "I'll leave tomorrow's problems to tomorrow's me.",
+    "anime": "One Punch Man",
+    "character": "Saitama"
   },
   {
-  "japanese": "オラオラオラオラオラ！",
-  "romaji": "Ora ora ora ora ora!",
-  "english": "Ora ora ora ora ora! (alt wording 8) (alt wording 60)",
-  "anime": "JoJo's Bizarre Adventure: Stardust Crusaders",
-  "character": "Jotaro Kujo"
-},
+    "japanese": "オラオラオラオラオラ！",
+    "romaji": "Ora ora ora ora ora!",
+    "english": "Ora ora ora ora ora! (alt wording 8) (alt wording 60)",
+    "anime": "JoJo's Bizarre Adventure: Stardust Crusaders",
+    "character": "Jotaro Kujo"
+  },
   {
-  "japanese": "おれは人間を超越する！",
-  "romaji": "Ore wa ningen o chouetsu suru!",
-  "english": "I will transcend humanity!",
-  "anime": "JoJo's Bizarre Adventure: Battle Tendency",
-  "character": "Kars"
-},
-{
-  "japanese": "勝つために戦うのではない、生きるために戦うんだ",
-  "romaji": "Katsu tame ni tatakau no dewa nai, ikiru tame ni tatakaun da",
-  "english": "We don’t fight to win, we fight to live",
-  "anime": "Attack on Titan",
-  "character": "Eren Yeager"
-},
-{
-  "japanese": "俺を誰だと思ってやがる!",
-  "romaji": "Ore o dare da to omotte yagaru!",
-  "english": "Who the hell do you think I am! (alt wording 46)",
-  "anime": "Gurren Lagann",
-  "character": "Kamina"
-},
-{
-  "japanese": "あきらめたらそこで試合終了ですよ…？",
-  "romaji": "Akirametara soko de shiai shuuryou desu yo...?",
-  "english": "If you give up, that's the end of the game. (alt wording 21) (alt wording 73)",
-  "anime": "Slam Dunk",
-  "character": "Kaede Rukawa"
-},
-{
-  "japanese": "大丈夫、僕最強だから",
-  "romaji": "Daijoubu, boku saikyou dakara",
-  "english": "Relax, I'm the strongest.",
-  "anime": "Jujutsu Kaisen",
-  "character": "Satoru Gojo"
-},
-{
-  "japanese": "オレ様の美技にブギウギ",
-  "romaji": "Ore-sama no bigi ni bugiugi",
-  "english": "Dance to my beautiful technique! (alt wording 23) (alt wording 75)",
-  "anime": "The Prince of Tennis",
-  "character": "Keigo Atobe"
-}
+    "japanese": "おれは人間を超越する！",
+    "romaji": "Ore wa ningen o chouetsu suru!",
+    "english": "I will transcend humanity!",
+    "anime": "JoJo's Bizarre Adventure: Battle Tendency",
+    "character": "Kars"
+  },
+  {
+    "japanese": "勝つために戦うのではない、生きるために戦うんだ",
+    "romaji": "Katsu tame ni tatakau no dewa nai, ikiru tame ni tatakaun da",
+    "english": "We don’t fight to win, we fight to live",
+    "anime": "Attack on Titan",
+    "character": "Eren Yeager"
+  },
+  {
+    "japanese": "俺を誰だと思ってやがる!",
+    "romaji": "Ore o dare da to omotte yagaru!",
+    "english": "Who the hell do you think I am! (alt wording 46)",
+    "anime": "Gurren Lagann",
+    "character": "Kamina"
+  },
+  {
+    "japanese": "あきらめたらそこで試合終了ですよ…？",
+    "romaji": "Akirametara soko de shiai shuuryou desu yo...?",
+    "english": "If you give up, that's the end of the game. (alt wording 21) (alt wording 73)",
+    "anime": "Slam Dunk",
+    "character": "Kaede Rukawa"
+  },
+  {
+    "japanese": "大丈夫、僕最強だから",
+    "romaji": "Daijoubu, boku saikyou dakara",
+    "english": "Relax, I'm the strongest.",
+    "anime": "Jujutsu Kaisen",
+    "character": "Satoru Gojo"
+  },
+  {
+    "japanese": "オレ様の美技にブギウギ",
+    "romaji": "Ore-sama no bigi ni bugiugi",
+    "english": "Dance to my beautiful technique! (alt wording 23) (alt wording 75)",
+    "anime": "The Prince of Tennis",
+    "character": "Keigo Atobe"
+  },
+  {
+    "japanese": "大丈夫、僕最強だから",
+    "romaji": "Daijoubu, boku saikyou dakara",
+    "english": "Relax, I'm the strongest.",
+    "anime": "Jujutsu Kaisen",
+    "character": "Satoru Gojo"
+  }
 ]
