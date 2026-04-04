@@ -6,7 +6,7 @@
     "english": "One stone, two birds",
     "meaning": "Accomplishing two things with one action",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 2,
@@ -41,7 +41,7 @@
     "romaji": "Chiri mo tsumoreba yama to naru",
     "english": "Even dust, if piled up, becomes a mountain",
     "meaning": "Small efforts accumulate into great achievements",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -123,7 +123,7 @@
     "english": "Hearing a hundred times is not as good as seeing once",
     "meaning": "Seeing is believing",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 15,
@@ -132,7 +132,7 @@
     "english": "Three people together have the wisdom of Monju",
     "meaning": "Two heads are better than one",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 16,
@@ -141,7 +141,7 @@
     "english": "Fortune comes to a laughing gate",
     "meaning": "Happiness and good fortune come to those who smile",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 17,
@@ -177,7 +177,7 @@
     "english": "Not knowing is Buddha",
     "meaning": "Ignorance is bliss",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 21,
@@ -222,7 +222,7 @@
     "english": "Early rising is worth three coins",
     "meaning": "The early bird catches the worm",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 26,
@@ -375,7 +375,7 @@
     "english": "Fame from a mistake",
     "meaning": "A lucky break that comes from an error",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 44,
@@ -402,7 +402,7 @@
     "english": "Tap a stone bridge before crossing",
     "meaning": "Be very cautious",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 46,
@@ -483,7 +483,7 @@
     "english": "The neighbor's flowers are red",
     "meaning": "The grass is always greener on the other side",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 55,
@@ -672,7 +672,7 @@
     "english": "Three years on a stone",
     "meaning": "Perseverance will be rewarded",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 76,
@@ -717,7 +717,7 @@
     "english": "The moon and a turtle",
     "meaning": "Vast difference; not comparable",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 81,
@@ -744,7 +744,7 @@
     "english": "Dried bonito to a cat",
     "meaning": "Leave temptation unattended at your own risk",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 84,
@@ -752,7 +752,7 @@
     "romaji": "Yabu wo tsutsuite hebi wo dasu",
     "english": "Poke the bush and bring out a snake",
     "meaning": "Stir up trouble unnecessarily",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -771,7 +771,7 @@
     "english": "Put care into care",
     "meaning": "Double-check; be extra careful",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 87,
@@ -807,7 +807,7 @@
     "english": "Continuation is power",
     "meaning": "Consistency leads to strength",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 91,
@@ -978,7 +978,7 @@
     "english": "If you eat poison, eat the plate too",
     "meaning": "If you must do it, go all the way",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 110,
@@ -1068,7 +1068,7 @@
     "english": "One who chases two rabbits catches neither",
     "meaning": "Focus on one thing at a time",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 120,
@@ -1176,7 +1176,7 @@
     "english": "Three years on a stone",
     "meaning": "Perseverance brings results",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 132,
@@ -1194,7 +1194,7 @@
     "english": "A three-day monk",
     "meaning": "Someone who quits quickly",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 134,
@@ -1293,7 +1293,7 @@
     "english": "A frog's child is a frog",
     "meaning": "Children resemble their parents",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 145,
@@ -1338,7 +1338,7 @@
     "english": "Even a packhorse driver looks good in fine clothes",
     "meaning": "Clothes make the person",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 150,
@@ -1491,7 +1491,7 @@
     "english": "Even a packhorse driver looks good in fine clothes",
     "meaning": "Clothes make the person",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 167,
@@ -1554,7 +1554,7 @@
     "english": "Put care into care",
     "meaning": "Double-check everything",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 174,
@@ -1562,7 +1562,7 @@
     "romaji": "Ichijitsu senshuu",
     "english": "A day feels like a thousand autumns",
     "meaning": "Waiting makes time feel long",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1581,7 +1581,7 @@
     "english": "Mochi should be made by the mochi shop",
     "meaning": "Leave it to the experts",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 177,
@@ -1589,7 +1589,7 @@
     "romaji": "Toudai moto kurashi",
     "english": "It’s darkest under the lighthouse",
     "meaning": "The obvious is overlooked",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {

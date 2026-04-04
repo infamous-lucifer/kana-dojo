@@ -321,5 +321,55 @@
   "difficulty": "medium",
   "answers": ["Kyushu", "Honshu", "Shikoku", "Hokkaido"],
   "correctIndex": 0
+  },
+  {
+  "question": "What is the Japanese term for a traditional drum?",
+  "difficulty": "medium",
+  "answers": ["Taiko", "Shamisen", "Koto", "Fue"],
+  "correctIndex": 0
+  },
+  {
+  "question": "Which Japanese city hosted the 1998 Winter Olympics? (Community variation 57)",
+  "difficulty": "medium",
+  "answers": [
+    "Nagano",
+    "Sapporo",
+    "Niigata",
+    "Sendai"
+  ],
+  "correctIndex": 0
+  },
+  {
+    "question": "Which Japanese city is famous for its snow festival featuring ice sculptures?",
+    "difficulty": "medium",
+    "answers": [
+      "Sapporo",
+      "Sendai",
+      "Fukuoka",
+      "Okayama"
+    ],
+    "correctIndex": 0
+  },
+  {
+  "question": "What is the name of Japan’s largest lake?",
+  "difficulty": "medium",
+  "answers": [
+    "Lake Biwa",
+    "Lake Towada",
+    "Lake Ashi",
+    "Lake Shinji"
+  ],
+  "correctIndex": 0
+  },
+  {
+  "question": "Which Japanese food is a savory pancake cooked on a griddle?",
+  "difficulty": "medium",
+  "answers": [
+    "Okonomiyaki",
+    "Sashimi",
+    "Onigiri",
+    "Mochi"
+  ],
+  "correctIndex": 0
   }
 ]

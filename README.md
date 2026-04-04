@@ -134,6 +134,36 @@ npm run check
 
 > See [Architecture docs](./docs/ARCHITECTURE.md) for full technical details.
 
+## Credits
+
+### Logo
+
+- [Brandon Haupt](https://www.instagram.com/talorash/) — creator of the KanaDojo logo.
+
+### Sponsor
+
+- [Vercel](https://vercel.com/) — KanaDojo is sponsored by Vercel.
+- [Vercel Open Source Program](https://vercel.com/open-source-program) — part of the broader OSS ecosystem we’re grateful to be part of.
+
+### Inspiration
+
+- [Duolingo](https://www.duolingo.com/) — main inspiration.
+- [Monkeytype](https://monkeytype.com/) — UI and design inspiration.
+- [Monkeytype GitHub repository](https://github.com/monkeytypegame/monkeytype)
+
+### Japanese Language Libraries
+
+- [Kuroshiro](https://github.com/hexenq/kuroshiro) — Japanese text conversion and romanization.
+- [Kuromoji](https://github.com/takuyaa/kuromoji.js) — Japanese tokenizer used for text analysis.
+- [Wanakana](https://github.com/WaniKani/WanaKana) — kana and romaji transliteration helpers.
+
+### Data Sources
+
+- [JMdict](https://www.edrdg.org/jmdict/j_jmdict.html) — Japanese-English dictionary data.
+- [KANJIDIC](http://www.edrdg.org/wiki/index.php/KANJIDIC_Project) — kanji readings and meanings database.
+- [Jonathan Waller's JLPT Resources](https://japanesetest4you.com/) — JLPT study references.
+- [jlptsensei.com](https://jlptsensei.com/) — JLPT vocabulary and study material.
+
 ## Star History
 
 <div align="center">
@@ -155,7 +185,7 @@ This project is licensed under the AGPL 3.0 License — see [LICENSE.md](./LICEN
 
 <div align="center">
 
-**Made with ❤️ for Japanese language learners worldwide**
+**Made with ❤️ by the open-source community for Japanese language learners worldwide**
 
 がんばって！ (Ganbatte! — Do your best!)
 

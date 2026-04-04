@@ -25,6 +25,9 @@ import SelectionStatusBar from '@/shared/components/Menu/SelectionStatusBar';
 type CollectionLevel = 'n5' | 'n4' | 'n3' | 'n2' | 'n1';
 type ContentType = 'kanji' | 'vocabulary';
 
+const UNIT_SELECTOR_ACTIVE_FLOAT_CLASSES =
+  'motion-safe:animate-float [--float-distance:-3.5px] delay-500ms';
+
 // Calculate number of sets (10 items per set)
 const calculateSets = (length: number) => Math.ceil(length / 10);
 
@@ -176,13 +179,20 @@ const UnitSelector = () => {
               {isSelected && (
                 <motion.div
                   layoutId='collection-selector-indicator'
-                  className='absolute inset-0 rounded-3xl border-b-10 border-(--main-color-accent) bg-(--main-color)'
+                  className='absolute inset-0 rounded-3xl'
                   transition={{
                     type: 'spring',
                     stiffness: 300,
                     damping: 30,
                   }}
-                />
+                >
+                  <div
+                    className={clsx(
+                      'h-full w-full rounded-3xl border-b-10 border-(--main-color-accent) bg-(--main-color)',
+                      UNIT_SELECTOR_ACTIVE_FLOAT_CLASSES,
+                    )}
+                  />
+                </motion.div>
               )}
               <ActionButton
                 onClick={() => handleCollectionSelect(collection.name)}
@@ -192,6 +202,7 @@ const UnitSelector = () => {
                 borderRadius='3xl'
                 className={clsx(
                   'relative z-10 w-full flex-col gap-1 px-4 pt-4 pb-6',
+                  isSelected && UNIT_SELECTOR_ACTIVE_FLOAT_CLASSES,
                   isSelected
                     ? 'bg-transparent text-(--background-color)'
                     : 'bg-transparent text-(--main-color) hover:bg-(--border-color)/50',

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
   CircleArrowLeft,
   RotateCcw,
@@ -68,6 +68,28 @@ export default function ClassicSessionSummary({
     if (totalTimeMs === 0) return 0;
     return Math.round((total / (totalTimeMs / 60000)) * 10) / 10;
   }, [total, totalTimeMs]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        playClick();
+        onBackToSelection();
+      }
+
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        playClick();
+        onNewSession();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onBackToSelection, onNewSession, playClick]);
 
 
   return (

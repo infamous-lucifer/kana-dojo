@@ -51,6 +51,8 @@ type LevelSetCardsProps<TLevel extends string, TItem> = {
 
 const INITIAL_ROWS = 5;
 const ROWS_PER_LOAD = 5;
+const LEVEL_SET_SELECTED_FLOAT_CLASSES =
+  'motion-safe:animate-float [--float-distance:-3px] delay-1000ms';
 
 const LevelSetCards = <TLevel extends string, TItem>({
   levelOrder,
@@ -345,14 +347,15 @@ const LevelSetCards = <TLevel extends string, TItem>({
                       )}
                     >
                       <button
-                        className={clsx(
-                          'group flex items-center justify-center gap-2 text-2xl',
-                          'rounded-3xl hover:cursor-pointer',
-                          'transition-all duration-250 ease-in-out',
-                          'border-b-10 px-2 py-3 max-md:mx-4',
-                          isSelected
-                            ? 'border-(--secondary-color-accent) bg-(--secondary-color) text-(--background-color)'
-                            : 'border-(--border-color) bg-(--background-color) hover:border-(--main-color)/70',
+                      className={clsx(
+                        'group flex items-center justify-center gap-2 text-2xl',
+                        'rounded-3xl hover:cursor-pointer',
+                        'transition-all duration-250 ease-in-out',
+                        'border-b-10 px-2 py-3 max-md:mx-4',
+                        isSelected && LEVEL_SET_SELECTED_FLOAT_CLASSES,
+                        isSelected
+                          ? 'border-(--secondary-color-accent) bg-(--secondary-color) text-(--background-color)'
+                          : 'border-(--border-color) bg-(--background-color) hover:border-(--main-color)/70',
                         )}
                         onClick={e => {
                           e.currentTarget.blur();

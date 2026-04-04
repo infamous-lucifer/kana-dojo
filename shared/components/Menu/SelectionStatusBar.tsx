@@ -190,7 +190,7 @@ const SelectionStatusBar = () => {
               borderColorScheme='main'
               borderRadius='3xl'
               borderBottomThickness={10}
-              className='w-auto bg-(--main-color)/80 px-4 py-3 lg:px-6 animate-float [--float-distance:-4px] sm:[--float-distance:-6px]'
+              className='w-auto bg-(--main-color)/80 px-4 py-3 lg:px-6 motion-safe:animate-float [--float-distance:-4px] sm:[--float-distance:-6px]'
               onClick={handleClear}
               aria-label='Clear selected levels'
             >

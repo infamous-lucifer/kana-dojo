@@ -28,6 +28,8 @@ import AuroraText from '@/shared/components/ui/magicui/AuroraText';
 const SIDEBAR_SECTION_STORAGE_PREFIX = 'sidebar-collapsible-';
 const SIDEBAR_DESKTOP_COLLAPSED_STORAGE_KEY = 'sidebar-desktop-collapsed';
 const SIDEBAR_PREFERENCES_VISITED_STORAGE_KEY = 'sidebar-preferences-visited';
+const SIDEBAR_ACTIVE_FLOAT_CLASSES =
+  'motion-safe:animate-float [--float-distance:-3.5px]';
 
 // ============================================================================
 // Types
@@ -147,8 +149,7 @@ const NavLink = memo(
     // Style classes for original (simple) design
     const activeClassesSimple =
       'bg-(--border-color) text-(--main-color) lg:bg-(--card-color)';
-    const inactiveClasses =
-      'text-(--secondary-color) hover:bg-(--card-color)';
+    const inactiveClasses = 'text-(--secondary-color) hover:bg-(--card-color)';
 
     const renderIcon = (): ReactNode => {
       if (item.charIcon) {
@@ -177,8 +178,8 @@ const NavLink = memo(
     if (useSlidingIndicator) {
       // Different indicator styles based on USE_ACTION_BUTTON_STYLE
       const indicatorClasses = USE_ACTION_BUTTON_STYLE
-        ? 'absolute inset-0 rounded-xl lg:rounded-2xl border-b-6 lg:border-b-8 border-(--main-color-accent) bg-(--main-color)'
-        : 'absolute inset-0 rounded-2xl bg-(--card-color)';
+        ? 'h-full w-full rounded-xl lg:rounded-2xl border-b-6 lg:border-b-8 border-(--main-color-accent) bg-(--main-color)'
+        : 'h-full w-full rounded-2xl bg-(--card-color)';
 
       // Text color when active differs based on style
       const activeTextClass = USE_ACTION_BUTTON_STYLE
@@ -198,13 +199,17 @@ const NavLink = memo(
           {isActive && (
             <motion.div
               layoutId='sidebar-nav-indicator'
-              className={indicatorClasses}
+              className='absolute inset-0 rounded-2xl'
               transition={{
                 type: 'spring',
                 stiffness: 300,
                 damping: 30,
               }}
-            />
+            >
+              <div
+                className={clsx(indicatorClasses, SIDEBAR_ACTIVE_FLOAT_CLASSES)}
+              />
+            </motion.div>
           )}
           <Link
             href={item.href}
@@ -217,6 +222,7 @@ const NavLink = memo(
               isDesktopCollapsed && isMain && 'lg:justify-center lg:px-3',
               paddingClasses,
               !isMain && 'max-lg:hidden',
+              isActive && SIDEBAR_ACTIVE_FLOAT_CLASSES,
               isActive
                 ? activeTextClass
                 : 'text-(--secondary-color) hover:bg-(--card-color)',
@@ -256,24 +262,24 @@ const NavLink = memo(
           <ActionButton
             borderBottomThickness={6}
             borderRadius='xl'
+            className={clsx(
+              'motion-safe:animate-float flex items-center gap-2 [--float-distance:-3px]',
+              isMain ? 'text-2xl' : 'text-base',
+              'max-lg:justify-center max-lg:px-3 max-lg:py-2 lg:w-full lg:px-4 lg:py-2',
+              isDesktopCollapsed && isMain && 'lg:justify-center lg:px-3',
+              !isMain && 'max-lg:hidden',
+            )}
+          >
+            {renderIcon()}
+            <span
               className={clsx(
-                'flex items-center gap-2',
-                isMain ? 'text-2xl' : 'text-base',
-                'max-lg:justify-center max-lg:px-3 max-lg:py-2 lg:w-full lg:px-4 lg:py-2',
-                isDesktopCollapsed && isMain && 'lg:justify-center lg:px-3',
-                !isMain && 'max-lg:hidden',
+                isMain && 'max-lg:hidden',
+                isMain && isDesktopCollapsed && 'lg:hidden',
               )}
             >
-              {renderIcon()}
-              <span
-                className={clsx(
-                  isMain && 'max-lg:hidden',
-                  isMain && isDesktopCollapsed && 'lg:hidden',
-                )}
-              >
-                {item.label}
-              </span>
-            </ActionButton>
+              {item.label}
+            </span>
+          </ActionButton>
         </Link>
       );
     }
@@ -358,12 +364,14 @@ const Sidebar = () => {
 
   // Lazy load experiments
   const [loadedExperiments, setLoadedExperiments] = useState<Experiment[]>([]);
-  const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return (
-      sessionStorage.getItem(SIDEBAR_DESKTOP_COLLAPSED_STORAGE_KEY) === 'true'
-    );
-  });
+  const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(
+    () => {
+      if (typeof window === 'undefined') return false;
+      return (
+        sessionStorage.getItem(SIDEBAR_DESKTOP_COLLAPSED_STORAGE_KEY) === 'true'
+      );
+    },
+  );
   const [hasVisitedPreferences, setHasVisitedPreferences] = useState(() => {
     if (typeof window === 'undefined') return false;
 
@@ -577,7 +585,7 @@ const Sidebar = () => {
       id='main-sidebar'
       className={clsx(
         'flex lg:flex-col lg:items-start',
-        'lg:sticky lg:relative lg:top-0 lg:h-screen lg:overflow-x-hidden lg:overflow-y-auto',
+        'lg:relative lg:sticky lg:top-0 lg:h-screen lg:overflow-x-hidden lg:overflow-y-auto',
         'lg:pt-6',
         'max-lg:fixed max-lg:bottom-0 max-lg:w-full',
         'max-lg:bg-(--card-color)',
@@ -601,7 +609,7 @@ const Sidebar = () => {
         }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
-        <h1 className='flex items-center gap-1.5 pl-4 text-3xl max-3xl:flex-col max-3xl:items-start'>
+        <h1 className='max-3xl:flex-col max-3xl:items-start flex items-center gap-1.5 pl-4 text-3xl'>
           {USE_AURORA_SIDEBAR_HEADING ? (
             <>
               <AuroraText className='font-bold'>KanaDojo</AuroraText>
@@ -667,20 +675,21 @@ const Sidebar = () => {
                 onToggle={onToggle}
               />
               {/* Only show items if section is expanded or not collapsible */}
-              {(!section.collapsible || isExpanded) && section.items.length > 0 && (
-                <div className='flex w-full flex-col gap-0.5 max-lg:hidden'>
-                  {section.items.map(item => (
-                    <NavLink
-                      key={item.href}
-                      item={item}
-                      isActive={isActive(item.href)}
-                      onClick={playClick}
-                      variant='secondary'
-                      useSlidingIndicator={true}
-                    />
-                  ))}
-                </div>
-              )}
+              {(!section.collapsible || isExpanded) &&
+                section.items.length > 0 && (
+                  <div className='flex w-full flex-col gap-0.5 max-lg:hidden'>
+                    {section.items.map(item => (
+                      <NavLink
+                        key={item.href}
+                        item={item}
+                        isActive={isActive(item.href)}
+                        onClick={playClick}
+                        variant='secondary'
+                        useSlidingIndicator={true}
+                      />
+                    ))}
+                  </div>
+                )}
             </div>
           );
         })}
@@ -691,9 +700,7 @@ const Sidebar = () => {
           'hidden cursor-pointer items-center rounded-2xl px-3 py-1.5 text-(--secondary-color) transition-colors hover:bg-(--card-color) hover:text-(--main-color) lg:absolute lg:bottom-8 lg:left-5 lg:flex',
         )}
         aria-label={
-          isDesktopSidebarCollapsed
-            ? 'Expand sidebar'
-            : 'Collapse sidebar'
+          isDesktopSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'
         }
       >
         {isDesktopSidebarCollapsed ? (
@@ -707,4 +714,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
