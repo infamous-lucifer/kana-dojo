@@ -1448,7 +1448,7 @@
   {
     "id": 242,
     "fact": "The Japanese word 'tokimeki' (ときめき) describes the fluttery excitement of a moment — like hearing a favorite song live.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1466,7 +1466,7 @@
   {
     "id": 245,
     "fact": "Japan’s 'furoshiki' (風呂敷) are reusable cloth wraps that can be folded into bags for groceries or gifts.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
@@ -1592,7 +1592,7 @@
   {
     "id": 266,
     "fact": "The phrase 'okage-sama' (おかげさま) expresses gratitude for unseen support — like thanking the people behind your success.",
-    "issued": false,
+    "issued": true,
     "completed": false
   },
   {
