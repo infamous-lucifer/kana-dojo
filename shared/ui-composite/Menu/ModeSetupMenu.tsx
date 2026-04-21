@@ -508,7 +508,7 @@ function GameModeCards({
             }}
             className={clsx(
               'w-full rounded-2xl p-5 text-left hover:cursor-pointer',
-              'flex items-center gap-4 border-2 bg-(--card-color)',
+              'flex items-center gap-4 border-4 bg-(--card-color)',
               isSelected ? 'border-(--main-color)' : 'border-(--border-color)',
             )}
           >
