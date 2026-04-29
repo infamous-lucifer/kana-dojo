@@ -280,5 +280,11 @@
   "backgroundColor": "'oklch(88.0% 0.030 340.0 / 1)'",
   "mainColor": "'oklch(55.0% 0.170 350.0 / 1)'",
   "secondaryColor": "'oklch(35.0% 0.020 260.0 / 1)'"
+},
+  {
+  "id": "'maple-lacquer'",
+  "backgroundColor": "'oklch(17.0% 0.035 20.0 / 1)'",
+  "mainColor": "'oklch(65.0% 0.215 30.0 / 1)'",
+  "secondaryColor": "'oklch(78.0% 0.135 70.0 / 1)'"
 }
 ]
