@@ -281,7 +281,7 @@ const UnitSelector = () => {
           {activeCollection &&
             shouldShowSubunitSelector(activeCollection.levelCount) && (
               <>
-                <div className='my-2 h-0.5 bg-(--border-color)' />
+                <div className='-mx-2 my-2 h-0.5 bg-(--border-color)' />
                 <SubunitSelector
                   subunits={activeSubunits}
                   selectedSubunitId={resolvedSelectedSubunitId}
