@@ -94,14 +94,6 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     recordCorrect: recordTargetLengthCorrect,
     recordWrong: recordTargetLengthWrong,
   } = useAdaptiveTargetLength();
-  // Ref so buildTargetPair's identity is stable even when targetLength changes.
-  // Without this, a level-up mid-question re-creates buildTargetPair → triggers
-  // useEffect([buildTargetPair]) → sets new pairData while still in 'correct'
-  // state → GameBottomBar freezes the *next* question's answer in the completed tab.
-  const targetLengthRef = useRef(targetLength);
-  useEffect(() => {
-    targetLengthRef.current = targetLength;
-  }, [targetLength]);
 
   const [inputValue, setInputValue] = useState('');
   const [bottomBarState, setBottomBarState] = useState<BottomBarState>('check');
@@ -156,7 +148,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     const promptParts: string[] = [];
     const answerParts: string[] = [];
 
-    for (let i = 0; i < targetLengthRef.current; i++) {
+    for (let i = 0; i < targetLength; i++) {
       const available = sourceArray.filter(char => !used.has(char));
       if (available.length === 0) break;
       const selected = adaptiveSelector.selectWeightedCharacter(available);
@@ -172,7 +164,7 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
       promptParts,
       answerParts,
     };
-  }, [isReverse, selectedRomaji, selectedKana, selectedPairs]);
+  }, [isReverse, selectedRomaji, selectedKana, targetLength, selectedPairs]);
 
   const [pairData, setPairData] = useState(() => buildTargetPair());
   const correctChar = pairData.correctChar;
@@ -439,8 +431,30 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
         onKeyDown={e => {
           if (e.key === 'Enter') {
             e.preventDefault();
-            if (inputValue.trim().length > 0 && bottomBarState !== 'correct' && !justAnsweredRef.current) {
+            if (inputValue.trim().length > 0 && bottomBarState !== 'correct') {
               handleCheck();
             }
           }
-       
+        }}
+      />
+      <Stars />
+
+      <GameBottomBar
+        state={bottomBarState}
+        onAction={showContinue ? handleContinue : handleCheck}
+        canCheck={canCheck}
+        feedbackContent={targetChar}
+        buttonRef={buttonRef}
+        hideRetry
+        clearWrongFeedbackSignal={clearWrongFeedbackSignal}
+        wrongFeedbackSignal={wrongFeedbackSignal}
+      />
+
+      {/* Spacer */}
+      <div className='h-32' />
+    </div>
+  );
+};
+
+export default InputGame;
+

@@ -341,8 +341,7 @@ const VocabInputGame = ({
     if (
       e.key === 'Enter' &&
       inputValue.trim().length &&
-      bottomBarState !== 'correct' &&
-      !justAnsweredRef.current
+      bottomBarState !== 'correct'
     ) {
       handleCheck();
     }
@@ -483,4 +482,6 @@ const VocabInputGame = ({
     </div>
   );
 };
-
+
+export default VocabInputGame;
+
