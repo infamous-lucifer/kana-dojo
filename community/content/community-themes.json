@@ -168,12 +168,6 @@
     "secondaryColor": "oklch(82.0% 0.145 130.0 / 1)"
   },
   {
-    "id": "coastal-breeze",
-    "backgroundColor": "oklch(20.0% 0.035 225.0 / 1)",
-    "mainColor": "oklch(80.0% 0.120 210.0 / 1)",
-    "secondaryColor": "oklch(70.0% 0.085 195.0 / 1)"
-  },
-  {
     "id": "sundown-shrine",
     "backgroundColor": "oklch(18.0% 0.055 330.0 / 1)",
     "mainColor": "oklch(72.0% 0.195 35.0 / 1)",

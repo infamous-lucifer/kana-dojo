@@ -18,6 +18,7 @@ import useClassicSessionStore from '@/shared/store/useClassicSessionStore';
 import { useAdaptiveTargetLength } from '@/shared/hooks/game/useAdaptiveTargetLength';
 import { useThemePreferences } from '@/features/Preferences';
 import { cn } from '@/shared/utils/utils';
+import { shouldSuppressContinueKeyboardShortcut } from '@/shared/utils/game/continueShortcutGuard';
 
 // Get the global adaptive selector for weighted character selection
 const adaptiveSelector = getGlobalAdaptiveSelector();
@@ -165,6 +166,13 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     };
   }, [isReverse, selectedRomaji, selectedKana, targetLength, selectedPairs]);
 
+  const buildTargetPairRef = useRef(buildTargetPair);
+  const selectionSignature = useMemo(
+    () =>
+      `${isReverse ? 'reverse' : 'normal'}::${selectedKana.join('|')}::${selectedRomaji.join('|')}`,
+    [isReverse, selectedKana, selectedRomaji],
+  );
+
   const [pairData, setPairData] = useState(() => buildTargetPair());
   const correctChar = pairData.correctChar;
   const targetChar = pairData.targetChar;
@@ -201,11 +209,24 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
     }
   }, [bottomBarState]);
 
+  useEffect(() => {
+    buildTargetPairRef.current = buildTargetPair;
+  }, [buildTargetPair]);
+
   // Keyboard shortcut for Enter/Space to trigger button
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const isEnter = event.key === 'Enter';
       const isSpace = event.code === 'Space' || event.key === ' ';
+      const isContinueShortcut = isEnter || isSpace;
+
+      if (
+        isContinueShortcut &&
+        shouldSuppressContinueKeyboardShortcut()
+      ) {
+        event.preventDefault();
+        return;
+      }
 
       if (isEnter) {
         if (justAnsweredRef.current) {
@@ -237,14 +258,16 @@ const InputGame = ({ isHidden, isReverse = false }: InputGameProps) => {
 
   useEffect(() => {
     if (isReady) {
-      setPairData(buildTargetPair());
+      // Keep the current solved prompt frozen even if adaptive difficulty changes.
+      // The next prompt should only be generated after explicit continue.
+      setPairData(buildTargetPairRef.current());
     }
-  }, [buildTargetPair, isReady]);
+  }, [isReady, selectionSignature]);
 
   const generateNewCharacter = useCallback(() => {
     if (!isReady) return;
-    setPairData(buildTargetPair());
-  }, [isReady, buildTargetPair]);
+    setPairData(buildTargetPairRef.current());
+  }, [isReady]);
 
   const handleCheck = () => {
     const trimmedInput = inputValue.trim();
