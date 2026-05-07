@@ -240,7 +240,7 @@
     "english": "The nail that sticks out gets hammered down",
     "meaning": "Those who stand out may face criticism",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 28,
@@ -710,7 +710,7 @@
     "english": "Just watching is a pleasure",
     "meaning": "Enjoy observing; you don't always need to participate",
     "completed": false,
-    "issued": false
+    "issued": true
   },
   {
     "id": 80,
